@@ -20,7 +20,7 @@ end
 def largest_contiguous_subsum(list)
   all_sub_arrs = []
   list.length.times do |start|
-    (start...length) do |finish|
+    (start...length).each do |finish|
       all_sub_arrs << list[start..finish]
     end
   end
@@ -156,15 +156,37 @@ end
 #O(n^2)
 def windowed_max_range(array, window)
   max_window = nil
+
   array.each_cons(window) do |w|
     value = w.max - w.min
     max_window ||= value
     max_window = value if max_window < value
   end
+
   max_window
 end
 
-#
-def windowed_max_range(array, window)
+require_relative "my_stackqueue.rb"
 
+def windowed_max_range(array, window)
+  current_best = 0
+  our_queue = MinMaxStackQueue.new
+
+  array.each do |num|
+    if our_queue.size == window
+      range = our_queue.max - our_queue.min
+      current_best = range if current_best < range
+      our_queue.dequeue
+    end
+    our_queue.enqueue(num)
+  end
+  range = our_queue.max - our_queue.min
+  current_best = range if current_best < range
+
+  current_best
 end
+
+p windowed_max_range([1, 0, 2, 5, 4, 8], 2) == 4 # 4, 8
+p windowed_max_range([1, 0, 2, 5, 4, 8], 3) == 5 # 0, 2, 5
+p windowed_max_range([1, 0, 2, 5, 4, 8], 4) == 6 # 2, 5, 4, 8
+p windowed_max_range([1, 3, 2, 5, 4, 8], 5) == 6 # 3, 2, 5, 4, 8
