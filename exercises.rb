@@ -58,7 +58,7 @@ end
 
 #ANAGRAMS
 
-#0(BIG)
+#0(n!)
 def massive_first_anagram?(word, word2)
   word.chars.permutation(word.length) do |possible|
     return true if possible.join == word2
@@ -128,16 +128,43 @@ def okay_two_sum?(arr, target)
 end
 
 #0(n)
+# def good_two_sum?(arr, target)
+#   numbers = arr.each.with_object(Hash.new(0)) do |num, hash|
+#     hash[num] += 1
+#   end
+#   arr.each do |num|
+#     if target - num == num
+#       return true if numbers[num] > 1
+#     else
+#       return true if numbers.include?(target - num)
+#     end
+#   end
+#   false
+# end
+
 def good_two_sum?(arr, target)
-  numbers = arr.each.with_object(Hash.new(0)) do |num, hash|
+  arr.each.with_object(Hash.new(0)) do |num, hash|
+    return true if hash.include?(target - num)
     hash[num] += 1
   end
-  arr.each do |num|
-    if target - num == num
-      return true if numbers[num] > 1
-    else
-      return true if numbers.include?(target - num)
-    end
-  end
+
   false
+end
+
+#### MAX WINDOWED RANGE ####
+
+#O(n^2)
+def windowed_max_range(array, window)
+  max_window = nil
+  array.each_cons(window) do |w|
+    value = w.max - w.min
+    max_window ||= value
+    max_window = value if max_window < value
+  end
+  max_window
+end
+
+#
+def windowed_max_range(array, window)
+
 end
