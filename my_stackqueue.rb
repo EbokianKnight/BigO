@@ -14,7 +14,7 @@ class MinMaxStackQueue
   end
 
   def dequeue
-    #debugger
+
     if @store_out.empty?
       until @store_in.empty?
         @store_out.push(@store_in.pop)
@@ -33,23 +33,23 @@ class MinMaxStackQueue
   end
 
   def max
-    #debugger
+
     if @store_in.empty?
-      p @store_out.max
+      @store_out.max
     elsif @store_out.empty?
-      p @store_in.max
+      @store_in.max
     else
-      p [@store_in.max, @store_out.max].max
+      [@store_in.max, @store_out.max].max
     end
   end
 
   def min
     if @store_in.empty?
-      p @store_out.min
+      @store_out.min
     elsif @store_out.empty?
-      p @store_in.min
+      @store_in.min
     else
-      p [@store_in.min, @store_out.min].min
+      [@store_in.min, @store_out.min].min
     end
   end
 
