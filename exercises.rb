@@ -30,22 +30,6 @@ def largest_contiguous_subsum(list)
 end
 
 #0(n)
-# def largest_contiguous_subsum(list)
-#   cur_max, cur_val, cur_neg = 0, 0, 0
-#   list.each do |el|
-#     if el < 0
-#       cur_neg += el
-#     end
-#     cur_val += el
-#     cur_max = cur_val if cur_val > cur_max
-#     if cur_neg.abs > cur_val
-#       cur_neg = 0
-#       cur_val = 0
-#     end
-#   end
-#   cur_max
-# end
-
 def largest_contiguous_subsum(list)
   cur_max, cur_val = 0, 0
   list.each do |el|
@@ -57,7 +41,6 @@ def largest_contiguous_subsum(list)
 end
 
 #ANAGRAMS
-
 #0(n!)
 def massive_first_anagram?(word, word2)
   word.chars.permutation(word.length) do |possible|
@@ -94,7 +77,7 @@ def forth_anagram(word1, word2)
 end
 
 #0(n)
-def bonus_anagram(word1, word2)
+def fifth_anagram(word1, word2)
   words = Hash.new(0)
   word1.each_char { |chr| words[chr] += 1 }
   word2.each_char { |chr| words[chr] -= 1 }
@@ -103,7 +86,7 @@ end
 
 
 
-##### TWO SUM? #######
+##### TWO SUM #######
 
 #O(n^2)
 def bad_two_sum?(arr, target_sum)
@@ -128,20 +111,6 @@ def okay_two_sum?(arr, target)
 end
 
 #0(n)
-# def good_two_sum?(arr, target)
-#   numbers = arr.each.with_object(Hash.new(0)) do |num, hash|
-#     hash[num] += 1
-#   end
-#   arr.each do |num|
-#     if target - num == num
-#       return true if numbers[num] > 1
-#     else
-#       return true if numbers.include?(target - num)
-#     end
-#   end
-#   false
-# end
-
 def good_two_sum?(arr, target)
   arr.each.with_object(Hash.new(0)) do |num, hash|
     return true if hash.include?(target - num)
