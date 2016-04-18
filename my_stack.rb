@@ -10,7 +10,7 @@ class MyStack
   end
 
   def push(el)
-    # debugger
+
     if @max.empty? || @max.last < el
       @max << el
     else
